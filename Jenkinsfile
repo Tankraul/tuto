@@ -5,22 +5,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                container('podman') {
+                container('flyway') {
                     script {
-                        sh 'podman run hello-world'
+                        sh 'flyway info -url="jdbc:mysql://mysql.mysql.svc.cluster.local:3306/devops" -user=elon -password=musk'
+                        sh 'flyway migrate -locations=filesystem:scripts -url="jdbc:mysql://mysql.mysql.svc.cluster.local:3306/devops" -user=elon -password=musk'
+                        sh 'flyway info -url="jdbc:mysql://mysql.mysql.svc.cluster.local:3306/devops" -user=elon -password=musk'
                     }
                 }
-                container('kubectl') {
-                    script {
-                        sh 'kubectl version'
-                    }
-                }
-              container('fortune') {
-                    script {
-                        sh 'fortune'
-                    }
-              }
+            }
         }
     }
-}
 }
