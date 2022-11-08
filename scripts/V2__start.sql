@@ -1,3 +1,3 @@
-if not exists create table tablar{
-id int not null primary key,
-descripcion varchar (255)}
+CREATE TABLE IF NOT EXISTS tablar(
+id INT not null PRIMARY KEY,
+descripcion varchar (255))
